@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace COP4365Project3
 {
-    public partial class Form1 : Form
+    public partial class StockDataForm : Form
     {
         public Bitmap getFormBackgroundImage()
         {
@@ -23,18 +23,10 @@ namespace COP4365Project3
             return bmp;
         }
 
-
-        public Form1()
+        public StockDataForm()
         {
             InitializeComponent();
-
             BackgroundImage = getFormBackgroundImage();
-        }
-
-        private void requestData_bttn_Click(object sender, EventArgs e)
-        {
-            StockDataForm form1 = new StockDataForm();
-            form1.Show();
         }
     }
 }

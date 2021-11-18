@@ -12,6 +12,10 @@ namespace COP4365Project3
 {
     public partial class StockDataForm : Form
     {
+        /// <summary>
+        /// stretch background image
+        /// </summary>
+        /// <returns></returns>
         public Bitmap getFormBackgroundImage()
         {
             Bitmap bmp = new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
@@ -26,7 +30,8 @@ namespace COP4365Project3
         public StockDataForm()
         {
             InitializeComponent();
-            BackgroundImage = getFormBackgroundImage();
+            this.BackColor = ColorTranslator.FromHtml("#1a152b");
+            //BackgroundImage = getFormBackgroundImage();
         }
     }
 }

@@ -35,7 +35,6 @@ namespace COP4365Project3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::COP4365Project3.Properties.Resources.dogecoin_2_the_moon;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "StockDataForm";
             this.Text = "stockDataForm";

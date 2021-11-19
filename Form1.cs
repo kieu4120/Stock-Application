@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RestSharp;
+using Newtonsoft.Json;
 
 namespace COP4365Project3
 {
@@ -34,16 +35,45 @@ namespace COP4365Project3
             //BackgroundImage = getFormBackgroundImage();
         }
 
+        private string human_readable_date_to_Epoc(int y, int m,int d)
+        {
+            TimeSpan t = DateTime.Now - new DateTime(y, m, d);
+            int secondsSinceEpoch = (int)t.TotalSeconds;
+            return secondsSinceEpoch.ToString();
+        }
+
         private void requestData_bttn_Click(object sender, EventArgs e)
         {
             StockDataForm form1 = new StockDataForm();
             form1.Show();
 
-            var client = new RestClient("https://yh-finance.p.rapidapi.com/stock/v3/get-historical-data?symbol=AMRN");
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("x-rapidapi-host", "yh-finance.p.rapidapi.com");
-            request.AddHeader("x-rapidapi-key", "SIGN-UP-FOR-KEY");
-            IRestResponse response = client.Execute(request);
+            int y = start_dateTimePicker.Value.Year;
+            int m = start_dateTimePicker.Value.Month;
+            int d = start_dateTimePicker.Value.Day;
+
+            //get ticker: - need to get rid of the name and use the ticker only. 
+            string ticker = ticker_comboBox.SelectedText;
+            //get start date: 
+            string start = start_dateTimePicker.Value.ToString("yyyy-MM-dd");
+
+            string start_epoch = human_readable_date_to_Epoc(y,m,d);
+
+            //get end date:
+            string end = end_dateTimePicker.Value.ToString("yyyy-MM-dd");
+            y = end_dateTimePicker.Value.Year;
+            m = end_dateTimePicker.Value.Month;
+            d = end_dateTimePicker.Value.Day;
+
+            string end_epoch = human_readable_date_to_Epoc(y, m, d);
+
+            //get the interval
+
+
+            //need to specify ticker, start, end, and period
+            var data = new data(ticker,start_epoch,end_epoch,) ;
+
+            
+            
 
 
 

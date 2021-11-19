@@ -33,11 +33,13 @@ namespace COP4365Project3
             this.candleStick_period_label = new System.Windows.Forms.Label();
             this.Ticker_label = new System.Windows.Forms.Label();
             this.requestData_bttn = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ticker_comboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.startDate_labelBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.start_dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.end_dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // candleStick_period_cbBox
@@ -84,15 +86,15 @@ namespace COP4365Project3
             this.requestData_bttn.UseVisualStyleBackColor = true;
             this.requestData_bttn.Click += new System.EventHandler(this.requestData_bttn_Click);
             // 
-            // comboBox1
+            // ticker_comboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.ticker_comboBox.FormattingEnabled = true;
+            this.ticker_comboBox.Items.AddRange(new object[] {
             "AMZN"});
-            this.comboBox1.Location = new System.Drawing.Point(387, 67);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(225, 33);
-            this.comboBox1.TabIndex = 4;
+            this.ticker_comboBox.Location = new System.Drawing.Point(387, 67);
+            this.ticker_comboBox.Name = "ticker_comboBox";
+            this.ticker_comboBox.Size = new System.Drawing.Size(225, 33);
+            this.ticker_comboBox.TabIndex = 4;
             // 
             // label1
             // 
@@ -130,17 +132,33 @@ namespace COP4365Project3
             this.textBox1.Size = new System.Drawing.Size(225, 31);
             this.textBox1.TabIndex = 8;
             // 
+            // start_dateTimePicker
+            // 
+            this.start_dateTimePicker.Location = new System.Drawing.Point(688, 223);
+            this.start_dateTimePicker.Name = "start_dateTimePicker";
+            this.start_dateTimePicker.Size = new System.Drawing.Size(365, 31);
+            this.start_dateTimePicker.TabIndex = 9;
+            // 
+            // end_dateTimePicker
+            // 
+            this.end_dateTimePicker.Location = new System.Drawing.Point(688, 357);
+            this.end_dateTimePicker.Name = "end_dateTimePicker";
+            this.end_dateTimePicker.Size = new System.Drawing.Size(365, 31);
+            this.end_dateTimePicker.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1133, 726);
+            this.Controls.Add(this.end_dateTimePicker);
+            this.Controls.Add(this.start_dateTimePicker);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.startDate_labelBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.ticker_comboBox);
             this.Controls.Add(this.requestData_bttn);
             this.Controls.Add(this.Ticker_label);
             this.Controls.Add(this.candleStick_period_label);
@@ -158,11 +176,13 @@ namespace COP4365Project3
         private System.Windows.Forms.Label candleStick_period_label;
         private System.Windows.Forms.Label Ticker_label;
         private System.Windows.Forms.Button requestData_bttn;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox ticker_comboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox startDate_labelBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DateTimePicker start_dateTimePicker;
+        private System.Windows.Forms.DateTimePicker end_dateTimePicker;
     }
 }
 

@@ -84,11 +84,14 @@ namespace COP4365Project3
             var data = new data(ticker,start_epoch,end_epoch,interval);
             JsonClass JsonClassObj = data.getJsonClassObj();
 
+            //this return null when in 2nd form.
             List<double> high = JsonClassObj.Chart.Result[0].Indicators.Quote[0].High;
             List<long> timestamp = JsonClassObj.Chart.Result[0].Timestamp;
             List<double> low = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Low;
             List<double> open = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Open;
             List<double> close = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Close;
+
+            
 
             //paste in open, high and close data to the stock dataForm 
             StockDataForm stockForm = new StockDataForm(high, low, open, close, timestamp);

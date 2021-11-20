@@ -84,8 +84,14 @@ namespace COP4365Project3
             var data = new data(ticker,start_epoch,end_epoch,interval);
             JsonClass JsonClassObj = data.getJsonClassObj();
 
-            List<double> High = JsonClassObj.Chart.Result[0].Indicators.Quote[0].High;
+            List<double> high = JsonClassObj.Chart.Result[0].Indicators.Quote[0].High;
+            List<long> timestamp = JsonClassObj.Chart.Result[0].Timestamp;
+            List<double> low = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Low;
+            List<double> open = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Open;
+            List<double> close = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Close;
+
             //paste in open, high and close data to the stock dataForm 
+            StockDataForm stockForm = new StockDataForm(high, low, open, close, timestamp);
 
 
             StockDataForm form1 = new StockDataForm();
@@ -113,7 +119,19 @@ namespace COP4365Project3
 
 
 
+             
+        }
 
+        private string epoch2string(long epoch)
+        {
+            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(epoch).ToShortDateString();
+        }
+
+        //works
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(epoch2string(1637355602));
         }
     }
 }

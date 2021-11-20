@@ -27,6 +27,11 @@ namespace COP4365Project3
             return bmp;
         }
 
+        public string epoch2string(long epoch)
+        {
+            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(epoch).ToShortDateString();
+        }
+
         public StockDataForm()
         {
             InitializeComponent();
@@ -35,16 +40,51 @@ namespace COP4365Project3
         }
 
         //
-        public StockDataForm(List<double> high, List<double>low, List<double>open,List<double>close)
+        public StockDataForm(List<double> high, List<double>low, List<double>open,List<double>close, List<long>timestamp)
         {
             InitializeComponent();
             this.BackColor = ColorTranslator.FromHtml("#1a152b");
 
             int candleNum = high.Count();
 
-            //create the form
 
-            
+
+            //candleStick_chart.DataSource =
+            DataSet1.chartDataTable dataTable = new DataSet1.chartDataTable();
+            DataSet1.chartRow row = dataTable.NewchartRow();
+
+            int count = high.Count();
+            for (int i = 0; i < count; i ++)
+            {
+                row["high"] = high[i];
+                dataTable.Rows.Add(row);
+                row["low"] = low[i];
+                dataTable.Rows.Add(row);
+                row["open"] = open[i];
+                dataTable.Rows.Add(row);
+                row["close"] = close[i];
+                dataTable.Rows.Add(row);
+
+                //timestamp - what is the data type in the table?
+            }
+
+            //populate the row
+
+            //clear data
+            candleStick_chart.ChartAreas["ChartArea1"].AxisX.MajorGrid.LineWidth = 0;
+            candleStick_chart.ChartAreas["ChartArea1"].AxisY.MajorGrid.LineWidth = 0;
+            //init
+            candleStick_chart.Series["data"].YValueMembers = "high,low,open,close";
+            candleStick_chart.Series["data"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Date;
+            candleStick_chart.Series["data"].CustomProperties = "PricdeDownColor=Red,PriceUpColor=Blue";
+            candleStick_chart.Series["data"]["OpenCloseStyle"] = "Triangle";
+            candleStick_chart.Series["data"]["ShowOpenClose"] = "Both";
+            candleStick_chart.DataManipulator.IsStartFromFirst = true;
+            candleStick_chart.DataSource = dataTable;
+            candleStick_chart.DataBind();
+
+
+
 
         }
 

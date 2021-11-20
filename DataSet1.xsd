@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="chart" msprop:Generator_TableClassName="chartDataTable" msprop:Generator_TableVarName="tablechart" msprop:Generator_RowChangedName="chartRowChanged" msprop:Generator_TablePropName="chart" msprop:Generator_RowDeletingName="chartRowDeleting" msprop:Generator_RowChangingName="chartRowChanging" msprop:Generator_RowEvHandlerName="chartRowChangeEventHandler" msprop:Generator_RowDeletedName="chartRowDeleted" msprop:Generator_RowClassName="chartRow" msprop:Generator_UserTableName="chart" msprop:Generator_RowEvArgName="chartRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="high" msprop:Generator_ColumnVarNameInTable="columnhigh" msprop:Generator_ColumnPropNameInRow="high" msprop:Generator_ColumnPropNameInTable="highColumn" msprop:Generator_UserColumnName="high" type="xs:double" minOccurs="0" />
+              <xs:element name="low" msprop:Generator_ColumnVarNameInTable="columnlow" msprop:Generator_ColumnPropNameInRow="low" msprop:Generator_ColumnPropNameInTable="lowColumn" msprop:Generator_UserColumnName="low" type="xs:double" minOccurs="0" />
+              <xs:element name="open" msprop:Generator_ColumnVarNameInTable="columnopen" msprop:Generator_ColumnPropNameInRow="open" msprop:Generator_ColumnPropNameInTable="openColumn" msprop:Generator_UserColumnName="open" type="xs:double" minOccurs="0" />
+              <xs:element name="close" msprop:Generator_ColumnVarNameInTable="columnclose" msprop:Generator_ColumnPropNameInRow="close" msprop:Generator_ColumnPropNameInTable="closeColumn" msprop:Generator_UserColumnName="close" type="xs:double" minOccurs="0" />
+              <xs:element name="day" msprop:Generator_ColumnVarNameInTable="columnday" msprop:Generator_ColumnPropNameInRow="day" msprop:Generator_ColumnPropNameInTable="dayColumn" msprop:Generator_UserColumnName="day" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

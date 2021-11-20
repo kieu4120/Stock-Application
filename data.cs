@@ -13,21 +13,34 @@ namespace COP4365Project3
         string ticker;
         string startDate;
         string endDate;
-        string period;
+        string interval;
 
-        public data(string t, string start, string end, string pe)
+        public data(string ticker, string start, string end, string interval)
         {
-            ticker = t;
+            this.ticker = ticker;
             startDate = start;
             endDate = end;
-            period = pe;
+            this.interval = interval;
         }
+        public void url()
+        {
+            string url_part1 = "https://yh-finance.p.rapidapi.com/stock/v2/get-chart?";
+            string url = url_part1 + "interval=" + interval + "&" + "symbol=" + ticker + "&" + "region=US" 
+                           + "&" + "period1=" +endDate + "&" +"period2=" + startDate;
+
+            Console.WriteLine(url);
+        }
+
         public JsonClass getJsonClassObj()
         {
-            //create client specify data
+            //from url: 
+            string url_part1 = "https://yh-finance.p.rapidapi.com/stock/v2/get-chart?";
+            string url = url_part1 + "interval=" + interval + "&" + "symbol=" + ticker + "&" + "region=US"
+                           + "&" + "period1=" + endDate + "&" + "period2=" + startDate;
+
 
             //create client
-            var client = new RestClient("https://yh-finance.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=AMRN&range=5d&region=US");
+            var client = new RestClient(url);
             //create request
             var request = new RestRequest(Method.GET);
 
@@ -49,5 +62,6 @@ namespace COP4365Project3
             //return json file as obj.
             return data;
         }
+
     }
 }

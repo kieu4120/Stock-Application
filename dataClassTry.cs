@@ -7,6 +7,7 @@ namespace COP4365Project3
     public partial class JsonClass
     {
         public Chart Chart { get; set; }
+
     }
 
     public partial class Chart
@@ -77,4 +78,6 @@ namespace COP4365Project3
         public long Gmtoffset { get; set; }
     }
 }
+
+
 

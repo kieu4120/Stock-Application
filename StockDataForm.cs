@@ -33,5 +33,21 @@ namespace COP4365Project3
             this.BackColor = ColorTranslator.FromHtml("#1a152b");
             //BackgroundImage = getFormBackgroundImage();
         }
+
+        //
+        public StockDataForm(List<double> high, List<double>low, List<double>open,List<double>close)
+        {
+            InitializeComponent();
+            this.BackColor = ColorTranslator.FromHtml("#1a152b");
+
+            int candleNum = high.Count();
+
+            //create the form
+
+            
+
+        }
+
+        
     }
 }

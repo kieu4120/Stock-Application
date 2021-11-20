@@ -44,6 +44,7 @@ namespace COP4365Project3
             // 
             // candleStick_period_cbBox
             // 
+            this.candleStick_period_cbBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.candleStick_period_cbBox.FormattingEnabled = true;
             this.candleStick_period_cbBox.Items.AddRange(new object[] {
             "Daily",
@@ -61,7 +62,7 @@ namespace COP4365Project3
             this.candleStick_period_label.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.candleStick_period_label.Location = new System.Drawing.Point(64, 515);
             this.candleStick_period_label.Name = "candleStick_period_label";
-            this.candleStick_period_label.Size = new System.Drawing.Size(518, 62);
+            this.candleStick_period_label.Size = new System.Drawing.Size(259, 31);
             this.candleStick_period_label.TabIndex = 1;
             this.candleStick_period_label.Text = "Candlestick Period";
             // 
@@ -72,7 +73,7 @@ namespace COP4365Project3
             this.Ticker_label.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.Ticker_label.Location = new System.Drawing.Point(65, 67);
             this.Ticker_label.Name = "Ticker_label";
-            this.Ticker_label.Size = new System.Drawing.Size(190, 62);
+            this.Ticker_label.Size = new System.Drawing.Size(95, 31);
             this.Ticker_label.TabIndex = 2;
             this.Ticker_label.Text = "Ticker";
             // 
@@ -88,9 +89,11 @@ namespace COP4365Project3
             // 
             // ticker_comboBox
             // 
+            this.ticker_comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ticker_comboBox.FormattingEnabled = true;
             this.ticker_comboBox.Items.AddRange(new object[] {
-            "AMZN"});
+            "AMZN",
+            "AAPL"});
             this.ticker_comboBox.Location = new System.Drawing.Point(387, 67);
             this.ticker_comboBox.Name = "ticker_comboBox";
             this.ticker_comboBox.Size = new System.Drawing.Size(225, 33);
@@ -103,7 +106,7 @@ namespace COP4365Project3
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label1.Location = new System.Drawing.Point(65, 225);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(284, 62);
+            this.label1.Size = new System.Drawing.Size(142, 31);
             this.label1.TabIndex = 5;
             this.label1.Text = "Start date";
             // 
@@ -121,7 +124,7 @@ namespace COP4365Project3
             this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label2.Location = new System.Drawing.Point(65, 365);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(260, 62);
+            this.label2.Size = new System.Drawing.Size(130, 31);
             this.label2.TabIndex = 7;
             this.label2.Text = "End date";
             // 

@@ -279,13 +279,13 @@ namespace COP4365Project3 {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class chartDataTable : global::System.Data.TypedTableBase<chartRow> {
             
-            private global::System.Data.DataColumn columnhigh;
+            private global::System.Data.DataColumn columnHigh;
             
-            private global::System.Data.DataColumn columnlow;
+            private global::System.Data.DataColumn columnLow;
             
-            private global::System.Data.DataColumn columnopen;
+            private global::System.Data.DataColumn columnOpen;
             
-            private global::System.Data.DataColumn columnclose;
+            private global::System.Data.DataColumn columnClose;
             
             private global::System.Data.DataColumn columnday;
             
@@ -324,33 +324,33 @@ namespace COP4365Project3 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn highColumn {
+            public global::System.Data.DataColumn HighColumn {
                 get {
-                    return this.columnhigh;
+                    return this.columnHigh;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn lowColumn {
+            public global::System.Data.DataColumn LowColumn {
                 get {
-                    return this.columnlow;
+                    return this.columnLow;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn openColumn {
+            public global::System.Data.DataColumn OpenColumn {
                 get {
-                    return this.columnopen;
+                    return this.columnOpen;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn closeColumn {
+            public global::System.Data.DataColumn CloseColumn {
                 get {
-                    return this.columnclose;
+                    return this.columnClose;
                 }
             }
             
@@ -399,13 +399,13 @@ namespace COP4365Project3 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public chartRow AddchartRow(double high, double low, double open, double close, string day) {
+            public chartRow AddchartRow(double High, double Low, double Open, double Close, string day) {
                 chartRow rowchartRow = ((chartRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        high,
-                        low,
-                        open,
-                        close,
+                        High,
+                        Low,
+                        Open,
+                        Close,
                         day};
                 rowchartRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowchartRow);
@@ -429,24 +429,24 @@ namespace COP4365Project3 {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnhigh = base.Columns["high"];
-                this.columnlow = base.Columns["low"];
-                this.columnopen = base.Columns["open"];
-                this.columnclose = base.Columns["close"];
+                this.columnHigh = base.Columns["High"];
+                this.columnLow = base.Columns["Low"];
+                this.columnOpen = base.Columns["Open"];
+                this.columnClose = base.Columns["Close"];
                 this.columnday = base.Columns["day"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnhigh = new global::System.Data.DataColumn("high", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnhigh);
-                this.columnlow = new global::System.Data.DataColumn("low", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnlow);
-                this.columnopen = new global::System.Data.DataColumn("open", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnopen);
-                this.columnclose = new global::System.Data.DataColumn("close", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnclose);
+                this.columnHigh = new global::System.Data.DataColumn("High", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHigh);
+                this.columnLow = new global::System.Data.DataColumn("Low", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLow);
+                this.columnOpen = new global::System.Data.DataColumn("Open", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOpen);
+                this.columnClose = new global::System.Data.DataColumn("Close", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnClose);
                 this.columnday = new global::System.Data.DataColumn("day", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnday);
             }
@@ -591,65 +591,65 @@ namespace COP4365Project3 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public double high {
+            public double High {
                 get {
                     try {
-                        return ((double)(this[this.tablechart.highColumn]));
+                        return ((double)(this[this.tablechart.HighColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'high\' in table \'chart\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'High\' in table \'chart\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablechart.highColumn] = value;
+                    this[this.tablechart.HighColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public double low {
+            public double Low {
                 get {
                     try {
-                        return ((double)(this[this.tablechart.lowColumn]));
+                        return ((double)(this[this.tablechart.LowColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'low\' in table \'chart\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Low\' in table \'chart\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablechart.lowColumn] = value;
+                    this[this.tablechart.LowColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public double open {
+            public double Open {
                 get {
                     try {
-                        return ((double)(this[this.tablechart.openColumn]));
+                        return ((double)(this[this.tablechart.OpenColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'open\' in table \'chart\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Open\' in table \'chart\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablechart.openColumn] = value;
+                    this[this.tablechart.OpenColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public double close {
+            public double Close {
                 get {
                     try {
-                        return ((double)(this[this.tablechart.closeColumn]));
+                        return ((double)(this[this.tablechart.CloseColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'close\' in table \'chart\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Close\' in table \'chart\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablechart.closeColumn] = value;
+                    this[this.tablechart.CloseColumn] = value;
                 }
             }
             
@@ -671,50 +671,50 @@ namespace COP4365Project3 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IshighNull() {
-                return this.IsNull(this.tablechart.highColumn);
+            public bool IsHighNull() {
+                return this.IsNull(this.tablechart.HighColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SethighNull() {
-                this[this.tablechart.highColumn] = global::System.Convert.DBNull;
+            public void SetHighNull() {
+                this[this.tablechart.HighColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IslowNull() {
-                return this.IsNull(this.tablechart.lowColumn);
+            public bool IsLowNull() {
+                return this.IsNull(this.tablechart.LowColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetlowNull() {
-                this[this.tablechart.lowColumn] = global::System.Convert.DBNull;
+            public void SetLowNull() {
+                this[this.tablechart.LowColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsopenNull() {
-                return this.IsNull(this.tablechart.openColumn);
+            public bool IsOpenNull() {
+                return this.IsNull(this.tablechart.OpenColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetopenNull() {
-                this[this.tablechart.openColumn] = global::System.Convert.DBNull;
+            public void SetOpenNull() {
+                this[this.tablechart.OpenColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IscloseNull() {
-                return this.IsNull(this.tablechart.closeColumn);
+            public bool IsCloseNull() {
+                return this.IsNull(this.tablechart.CloseColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetcloseNull() {
-                this[this.tablechart.closeColumn] = global::System.Convert.DBNull;
+            public void SetCloseNull() {
+                this[this.tablechart.CloseColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

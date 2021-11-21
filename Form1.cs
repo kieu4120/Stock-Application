@@ -95,10 +95,12 @@ namespace COP4365Project3
 
             //paste in open, high and close data to the stock dataForm 
             StockDataForm stockForm = new StockDataForm(high, low, open, close, timestamp);
+            stockForm.Show();
+            //StockDataForm stockForm = new StockDataForm(high, low, open, close, timestamp);
 
 
-            StockDataForm form1 = new StockDataForm();
-            form1.Show();
+            //StockDataForm form1 = new StockDataForm();
+            //form1.Show();
             /*
             var client = new RestClient("https://yh-finance.p.rapidapi.com/stock/v2/get-chart?interval=1wk&symbol=AAPL&region=US&period1=1637280000&period2=1637280000");
             //create request

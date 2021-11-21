@@ -57,6 +57,9 @@
     <Compile Include="data.cs" />
     <Compile Include="dataClass.cs" />
     <Compile Include="dataClassTry.cs" />
+    <Compile Include="DataSet1.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

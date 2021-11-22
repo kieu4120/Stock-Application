@@ -51,18 +51,17 @@ namespace COP4365Project3
 
         private void requestData_bttn_Click(object sender, EventArgs e)
         {
-           
+
 
             int y = start_dateTimePicker.Value.Year;
             int m = start_dateTimePicker.Value.Month;
             int d = start_dateTimePicker.Value.Day;
 
-            //get ticker: - need to get rid of the name and use the ticker only. 
-            string ticker = ticker_comboBox.Text;
-            //Console.WriteLine(ticker_comboBox.SelectedText);
-            //get start date - period2
-            //string start_epoch = human_readable_date_to_Epoc(y,m,d);
+            string[] fromTickers = ticker_comboBox.Text.Split('-');
+            string ticker = fromTickers[0];
             string start_epoch = human_readable_date_to_Epoc(y, m, d);
+
+            Console.WriteLine("START EPOCH" + start_epoch);
 
             //get end date - period1
             y = end_dateTimePicker.Value.Year;
@@ -89,55 +88,11 @@ namespace COP4365Project3
             List<long> timestamp = JsonClassObj.Chart.Result[0].Timestamp;
             List<double> low = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Low;
             List<double> open = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Open;
-            List<double> close = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Close;
-
-            
-
-            //paste in open, high and close data to the stock dataForm 
+            List<double> close = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Close; 
             StockDataForm stockForm = new StockDataForm(high, low, open, close, timestamp);
             stockForm.Show();
-            //StockDataForm stockForm = new StockDataForm(high, low, open, close, timestamp);
-
-
-            //StockDataForm form1 = new StockDataForm();
-            //form1.Show();
-            /*
-            var client = new RestClient("https://yh-finance.p.rapidapi.com/stock/v2/get-chart?interval=1wk&symbol=AAPL&region=US&period1=1637280000&period2=1637280000");
-            //create request
-            var request = new RestRequest(Method.GET);
-
-
-
-            //add stuff to request header
-            request.AddHeader("x-rapidapi-key", "f1407ffcd5msh250c8cde3235ed4p1072ccjsn12d793e69372");
-            request.AddHeader("x-rapidapi-host", "yh-finance.p.rapidapi.com");
-
-            //client request data and store response?
-            //if using execute<t> get the response 
-            IRestResponse response = client.Execute(request);
-
-            //Console.WriteLine(response.Content);
-            //Console.WriteLine(response.Content);
-            */
-
-
-
-
-
-             
         }
 
-        private string epoch2string(long epoch)
-        {
-            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(epoch).ToShortDateString();
-        }
-
-        //works
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Console.WriteLine(epoch2string(1637355602));
-        }
     }
 }
  

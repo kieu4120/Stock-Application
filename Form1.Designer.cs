@@ -40,7 +40,6 @@ namespace COP4365Project3
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.start_dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.end_dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // candleStick_period_cbBox
@@ -93,8 +92,16 @@ namespace COP4365Project3
             this.ticker_comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ticker_comboBox.FormattingEnabled = true;
             this.ticker_comboBox.Items.AddRange(new object[] {
-            "AMZN",
-            "AAPL"});
+            "AMZN-Amazon",
+            "AAPL-Apple",
+            "FB-Meta",
+            "NFLX-Netflix",
+            "GOOG-Alphabet",
+            "UBER-Uber",
+            "COIN-Coinbase",
+            "TLSA-Tesla",
+            "MSFT-Microsoft",
+            "FVRR-Fiverr"});
             this.ticker_comboBox.Location = new System.Drawing.Point(387, 67);
             this.ticker_comboBox.Name = "ticker_comboBox";
             this.ticker_comboBox.Size = new System.Drawing.Size(225, 33);
@@ -150,23 +157,12 @@ namespace COP4365Project3
             this.end_dateTimePicker.Size = new System.Drawing.Size(365, 31);
             this.end_dateTimePicker.TabIndex = 10;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(859, 582);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(170, 57);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1133, 726);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.end_dateTimePicker);
             this.Controls.Add(this.start_dateTimePicker);
             this.Controls.Add(this.textBox1);
@@ -198,7 +194,6 @@ namespace COP4365Project3
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DateTimePicker start_dateTimePicker;
         private System.Windows.Forms.DateTimePicker end_dateTimePicker;
-        private System.Windows.Forms.Button button1;
     }
 }
 

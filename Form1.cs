@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RestSharp;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace COP4365Project3
 {
@@ -52,16 +53,14 @@ namespace COP4365Project3
         private void requestData_bttn_Click(object sender, EventArgs e)
         {
 
-
             int y = start_dateTimePicker.Value.Year;
             int m = start_dateTimePicker.Value.Month;
             int d = start_dateTimePicker.Value.Day;
 
             string[] fromTickers = ticker_comboBox.Text.Split('-');
             string ticker = fromTickers[0];
-            string start_epoch = human_readable_date_to_Epoc(y, m, d);
 
-            Console.WriteLine("START EPOCH" + start_epoch);
+            string start_epoch = human_readable_date_to_Epoc(y, m, d);
 
             //get end date - period1
             y = end_dateTimePicker.Value.Year;
@@ -77,19 +76,19 @@ namespace COP4365Project3
                 interval = "1wk";
             else if (candleStick_period_cbBox.Text == "Monthly")
                 interval = "1m";
-            
 
-            //need to specify ticker, start, end, and period
-            var data = new data(ticker,start_epoch,end_epoch,interval);
-            JsonClass JsonClassObj = data.getJsonClassObj();
+            //download data 
+            string URL = "https://query1.finance.yahoo.com/v7/finance/download/" + ticker + "?period1=" + start_epoch + "&period2=" + end_epoch + "&interval=" + interval + "&events=history&includeAdjustedClose=true";
+            System.Net.WebClient client = new System.Net.WebClient();
+            byte[] buffer = client.DownloadData(URL);
+            string filePath = @"..\stock.csv";
+            Stream stream = new FileStream(filePath, FileMode.Create);
+            BinaryWriter writer = new BinaryWriter(stream);
+            writer.Write(buffer);
+            stream.Close();
 
-            //this return null when in 2nd form.
-            List<double> high = JsonClassObj.Chart.Result[0].Indicators.Quote[0].High;
-            List<long> timestamp = JsonClassObj.Chart.Result[0].Timestamp;
-            List<double> low = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Low;
-            List<double> open = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Open;
-            List<double> close = JsonClassObj.Chart.Result[0].Indicators.Quote[0].Close; 
-            StockDataForm stockForm = new StockDataForm(high, low, open, close, timestamp);
+
+            StockDataForm stockForm = new StockDataForm(fromTickers[1]);
             stockForm.Show();
         }
 

@@ -35,9 +35,7 @@ namespace COP4365Project3
             this.requestData_bttn = new System.Windows.Forms.Button();
             this.ticker_comboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.startDate_labelBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.start_dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.end_dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
@@ -52,7 +50,7 @@ namespace COP4365Project3
             "Monthly"});
             this.candleStick_period_cbBox.Location = new System.Drawing.Point(387, 515);
             this.candleStick_period_cbBox.Name = "candleStick_period_cbBox";
-            this.candleStick_period_cbBox.Size = new System.Drawing.Size(225, 33);
+            this.candleStick_period_cbBox.Size = new System.Drawing.Size(353, 33);
             this.candleStick_period_cbBox.TabIndex = 0;
             // 
             // candleStick_period_label
@@ -79,11 +77,11 @@ namespace COP4365Project3
             // 
             // requestData_bttn
             // 
-            this.requestData_bttn.Location = new System.Drawing.Point(849, 475);
+            this.requestData_bttn.Location = new System.Drawing.Point(848, 475);
             this.requestData_bttn.Name = "requestData_bttn";
             this.requestData_bttn.Size = new System.Drawing.Size(158, 73);
             this.requestData_bttn.TabIndex = 3;
-            this.requestData_bttn.Text = "REQUEST";
+            this.requestData_bttn.Text = "APPLY";
             this.requestData_bttn.UseVisualStyleBackColor = true;
             this.requestData_bttn.Click += new System.EventHandler(this.requestData_bttn_Click);
             // 
@@ -104,7 +102,7 @@ namespace COP4365Project3
             "FVRR-Fiverr"});
             this.ticker_comboBox.Location = new System.Drawing.Point(387, 67);
             this.ticker_comboBox.Name = "ticker_comboBox";
-            this.ticker_comboBox.Size = new System.Drawing.Size(225, 33);
+            this.ticker_comboBox.Size = new System.Drawing.Size(353, 33);
             this.ticker_comboBox.TabIndex = 4;
             // 
             // label1
@@ -118,13 +116,6 @@ namespace COP4365Project3
             this.label1.TabIndex = 5;
             this.label1.Text = "Start date";
             // 
-            // startDate_labelBox
-            // 
-            this.startDate_labelBox.Location = new System.Drawing.Point(387, 225);
-            this.startDate_labelBox.Name = "startDate_labelBox";
-            this.startDate_labelBox.Size = new System.Drawing.Size(225, 31);
-            this.startDate_labelBox.TabIndex = 6;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -136,23 +127,16 @@ namespace COP4365Project3
             this.label2.TabIndex = 7;
             this.label2.Text = "End date";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(387, 359);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(225, 31);
-            this.textBox1.TabIndex = 8;
-            // 
             // start_dateTimePicker
             // 
-            this.start_dateTimePicker.Location = new System.Drawing.Point(688, 223);
+            this.start_dateTimePicker.Location = new System.Drawing.Point(387, 226);
             this.start_dateTimePicker.Name = "start_dateTimePicker";
             this.start_dateTimePicker.Size = new System.Drawing.Size(365, 31);
             this.start_dateTimePicker.TabIndex = 9;
             // 
             // end_dateTimePicker
             // 
-            this.end_dateTimePicker.Location = new System.Drawing.Point(688, 357);
+            this.end_dateTimePicker.Location = new System.Drawing.Point(387, 366);
             this.end_dateTimePicker.Name = "end_dateTimePicker";
             this.end_dateTimePicker.Size = new System.Drawing.Size(365, 31);
             this.end_dateTimePicker.TabIndex = 10;
@@ -165,9 +149,7 @@ namespace COP4365Project3
             this.ClientSize = new System.Drawing.Size(1133, 726);
             this.Controls.Add(this.end_dateTimePicker);
             this.Controls.Add(this.start_dateTimePicker);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.startDate_labelBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ticker_comboBox);
             this.Controls.Add(this.requestData_bttn);
@@ -189,9 +171,7 @@ namespace COP4365Project3
         private System.Windows.Forms.Button requestData_bttn;
         private System.Windows.Forms.ComboBox ticker_comboBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox startDate_labelBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DateTimePicker start_dateTimePicker;
         private System.Windows.Forms.DateTimePicker end_dateTimePicker;
     }

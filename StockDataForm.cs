@@ -93,21 +93,32 @@ namespace COP4365Project3
             r.Close();
 
             lowest = Convert.ToInt32(dt.Compute("min([High])", string.Empty));
-            highest = Convert.ToInt32(dt.Compute("min([High])", string.Empty));
+            highest = Convert.ToInt32(dt.Compute("max([High])", string.Empty));
 
             int highMin = Convert.ToInt32(dt.Compute("min([High])", string.Empty));
             int lowMin = Convert.ToInt32(dt.Compute("min([Low])", string.Empty));
             int lowOpen = Convert.ToInt32(dt.Compute("min([Open])", string.Empty));
-            int closeOpen = Convert.ToInt32(dt.Compute("min([Close])", string.Empty));
+            int lowClose = Convert.ToInt32(dt.Compute("min([Close])", string.Empty));
+
+            int[] lowArr = { highMin, lowMin, lowOpen, lowClose};
+
+            int highMax = Convert.ToInt32(dt.Compute("max([High])", string.Empty));
+            int lowMax = Convert.ToInt32(dt.Compute("max([Low])", string.Empty));
+            int openMax = Convert.ToInt32(dt.Compute("max([Open])", string.Empty));
+            int closeMax = Convert.ToInt32(dt.Compute("max([Close])", string.Empty));
+
+            int[] highArr = { highMax, lowMax, openMax, closeMax };
 
 
-            int[] lowArr = { highMin, lowMin, lowOpen, closeOpen };
-            
-
-            foreach(int i in lowArr)
+            foreach (int i in lowArr)
             {
                 if (lowest > i)
                     lowest = i;
+                
+            }
+
+            foreach( int i in highArr)
+            {
                 if (highest < i)
                     highest = i;
             }

@@ -48,9 +48,9 @@ namespace COP4365Project3
             "Daily",
             "Weekly",
             "Monthly"});
-            this.candleStick_period_cbBox.Location = new System.Drawing.Point(387, 515);
+            this.candleStick_period_cbBox.Location = new System.Drawing.Point(322, 515);
             this.candleStick_period_cbBox.Name = "candleStick_period_cbBox";
-            this.candleStick_period_cbBox.Size = new System.Drawing.Size(353, 33);
+            this.candleStick_period_cbBox.Size = new System.Drawing.Size(124, 33);
             this.candleStick_period_cbBox.TabIndex = 0;
             // 
             // candleStick_period_label
@@ -58,7 +58,7 @@ namespace COP4365Project3
             this.candleStick_period_label.AutoSize = true;
             this.candleStick_period_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.candleStick_period_label.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.candleStick_period_label.Location = new System.Drawing.Point(64, 515);
+            this.candleStick_period_label.Location = new System.Drawing.Point(12, 517);
             this.candleStick_period_label.Name = "candleStick_period_label";
             this.candleStick_period_label.Size = new System.Drawing.Size(259, 31);
             this.candleStick_period_label.TabIndex = 1;
@@ -69,7 +69,7 @@ namespace COP4365Project3
             this.Ticker_label.AutoSize = true;
             this.Ticker_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Ticker_label.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Ticker_label.Location = new System.Drawing.Point(65, 67);
+            this.Ticker_label.Location = new System.Drawing.Point(18, 67);
             this.Ticker_label.Name = "Ticker_label";
             this.Ticker_label.Size = new System.Drawing.Size(95, 31);
             this.Ticker_label.TabIndex = 2;
@@ -77,7 +77,7 @@ namespace COP4365Project3
             // 
             // requestData_bttn
             // 
-            this.requestData_bttn.Location = new System.Drawing.Point(848, 475);
+            this.requestData_bttn.Location = new System.Drawing.Point(651, 627);
             this.requestData_bttn.Name = "requestData_bttn";
             this.requestData_bttn.Size = new System.Drawing.Size(158, 73);
             this.requestData_bttn.TabIndex = 3;
@@ -100,7 +100,7 @@ namespace COP4365Project3
             "TLSA-Tesla",
             "MSFT-Microsoft",
             "FVRR-Fiverr"});
-            this.ticker_comboBox.Location = new System.Drawing.Point(387, 67);
+            this.ticker_comboBox.Location = new System.Drawing.Point(322, 70);
             this.ticker_comboBox.Name = "ticker_comboBox";
             this.ticker_comboBox.Size = new System.Drawing.Size(353, 33);
             this.ticker_comboBox.TabIndex = 4;
@@ -110,7 +110,7 @@ namespace COP4365Project3
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.Location = new System.Drawing.Point(65, 225);
+            this.label1.Location = new System.Drawing.Point(18, 225);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(142, 31);
             this.label1.TabIndex = 5;
@@ -121,7 +121,7 @@ namespace COP4365Project3
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label2.Location = new System.Drawing.Point(65, 365);
+            this.label2.Location = new System.Drawing.Point(12, 365);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(130, 31);
             this.label2.TabIndex = 7;
@@ -129,16 +129,16 @@ namespace COP4365Project3
             // 
             // start_dateTimePicker
             // 
-            this.start_dateTimePicker.Location = new System.Drawing.Point(387, 226);
+            this.start_dateTimePicker.Location = new System.Drawing.Point(322, 226);
             this.start_dateTimePicker.Name = "start_dateTimePicker";
-            this.start_dateTimePicker.Size = new System.Drawing.Size(365, 31);
+            this.start_dateTimePicker.Size = new System.Drawing.Size(353, 31);
             this.start_dateTimePicker.TabIndex = 9;
             // 
             // end_dateTimePicker
             // 
-            this.end_dateTimePicker.Location = new System.Drawing.Point(387, 366);
+            this.end_dateTimePicker.Location = new System.Drawing.Point(322, 366);
             this.end_dateTimePicker.Name = "end_dateTimePicker";
-            this.end_dateTimePicker.Size = new System.Drawing.Size(365, 31);
+            this.end_dateTimePicker.Size = new System.Drawing.Size(353, 31);
             this.end_dateTimePicker.TabIndex = 10;
             // 
             // Form1
@@ -146,7 +146,7 @@ namespace COP4365Project3
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(1133, 726);
+            this.ClientSize = new System.Drawing.Size(857, 726);
             this.Controls.Add(this.end_dateTimePicker);
             this.Controls.Add(this.start_dateTimePicker);
             this.Controls.Add(this.label2);

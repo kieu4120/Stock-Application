@@ -33,11 +33,6 @@ namespace COP4365Project3
             return bmp;
         }
 
-        public string epoch2string(long epoch)
-        {
-            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(epoch).ToShortDateString();
-        }
-
         public StockDataForm(string companyName)
         {
             InitializeComponent();
@@ -57,11 +52,11 @@ namespace COP4365Project3
             var r = new StreamReader(@"..\stock.csv");
             r.ReadLine();
 
+            //add data to datable 
             DataRow row1 = dt.NewRow();
 
             var line1 = r.ReadLine();
             var data1 = line1.Split(',');
-
 
             row1["High"] = data1[2];
             row1["Low"] = data1[3];
@@ -70,9 +65,7 @@ namespace COP4365Project3
             row1["date"] = data1[0];
             dt.Rows.Add(row1);
 
-            lowest = Convert.ToInt32(Convert.ToDouble(data1[1]));
-
-
+            //add more data to data table.
             while (!r.EndOfStream)
             {
                 DataRow row = dt.NewRow();
@@ -92,6 +85,7 @@ namespace COP4365Project3
 
             r.Close();
 
+            //get lowest and highest for chart y axis
             lowest = Convert.ToInt32(dt.Compute("min([High])", string.Empty));
             highest = Convert.ToInt32(dt.Compute("max([High])", string.Empty));
 
@@ -114,7 +108,6 @@ namespace COP4365Project3
             {
                 if (lowest > i)
                     lowest = i;
-                
             }
 
             foreach( int i in highArr)
@@ -123,7 +116,7 @@ namespace COP4365Project3
                     highest = i;
             }
             
-              
+            //testing  
             Console.WriteLine(dt.Compute("min([High])", string.Empty));
             Console.WriteLine(dt.Compute("min([Low])", string.Empty));
             Console.WriteLine(dt.Compute("min([Open])", string.Empty));
@@ -144,8 +137,9 @@ namespace COP4365Project3
             candleStick_chart.ChartAreas["ChartArea1"].AxisX.MajorGrid.LineWidth = 0;
             candleStick_chart.ChartAreas["ChartArea1"].AxisY.MajorGrid.LineWidth = 0;
 
-            candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum = lowest + 10;
+            candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum = lowest - 10;
             candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum = highest + 10;
+
             //candleStick_chart.ChartAreas[0].AxisY.IsStartedFromZero = false;
 
             //set up the chart
@@ -173,16 +167,12 @@ namespace COP4365Project3
             candleStick_chart.Update();
 
             //var point1 = candleStick_chart.Series["data"].Points
-            foreach (DataPoint p in candleStick_chart.Series["data"].Points)
-            {
-                
-            }
-
             
+            //code to loop through candlesticks ( datapoint)
             foreach (DataPoint p in candleStick_chart.Series["data"].Points)
             {
-                Console.WriteLine(p.YValues[0]);
-                Console.WriteLine(p);
+                //Console.WriteLine(p.YValues[0]);
+                //Console.WriteLine(p);
 
             /*
                 double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
@@ -201,37 +191,23 @@ namespace COP4365Project3
             }
             
 
+            //code to add rectangle box
             var point = candleStick_chart.Series["data"].Points[0];
-
             double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
-
-
             RectangleAnnotation annotation = new RectangleAnnotation();
-            //annotation.BackColor = Color.Red;
             annotation.BackColor = Color.FromArgb(128, Color.White);
             annotation.ToolTip = "rectangle annotation";
-            //annotation.Width = candleStick_chart.Width * 0.08 / candleStick_chart.Series["data"].Points.Count;
             annotation.Width = 50 / candleStick_chart.Series["data"].Points.Count;
-            //annotation.Width = candleStick_chart.Width * 0.08 / candleStick_chart.Series["data"].Points.Count;
-            //annotation.Height = point.YValues[0] - point.YValues[1];
-            //annotation.Height = 3596 - 3531;
-            //annotation.Text = "I am a\nRectangleAnnotation";
-            
-            //annotation.Height = point.YValues[0] - point.YValues[1];
             annotation.Height = ((point.YValues[0] - point.YValues[1]) / y_range) * 85;
+
+            //testing
             Console.WriteLine("data");
             Console.WriteLine(y_range);
             Console.WriteLine(point.YValues[0] - point.YValues[1]);
             Console.WriteLine("Height: " + ((point.YValues[0] - point.YValues[1]) / y_range) * 85);
             annotation.AnchorOffsetY = -(annotation.Height);
-
-
             annotation.SetAnchor(point);
             candleStick_chart.Annotations.Add(annotation);
-            
-
-
-            //candleStick_chart.Series["data"].Points;
         }
     }
 }

@@ -225,7 +225,7 @@ namespace COP4365Project3
             switch (selectedItem)
             {
                 case "Neutral":
-                    isNeutral();
+                    isNeutral((highest - lowest) / 5);
                     break;
                 case "Long-ledded":
                     isLong_legged();
@@ -245,8 +245,11 @@ namespace COP4365Project3
             }
         }
 
-        public void isNeutral(double threshhold = 1)
+        public void isNeutral(double interval, double threshhold = 1)
         {
+
+            double scale = interval * .03;
+            Console.WriteLine("Scale: " + scale);
             foreach(DataPoint point in candleStick_chart.Series["data"].Points)
             {
                 //close(2) and open(3). 
@@ -255,9 +258,9 @@ namespace COP4365Project3
                     double remainder = point.YValues[2] - point.YValues[3];
 
                     //
-                    if(remainder/point.YValues[2] * 100 <= threshhold)
+                    if(remainder <= scale)
                     {
-                        Console.WriteLine("case1");
+                        Console.WriteLine("case1: " + remainder);
                         double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
                         RectangleAnnotation annotation = new RectangleAnnotation();
                         annotation.BackColor = Color.FromArgb(128, Color.White);
@@ -272,11 +275,11 @@ namespace COP4365Project3
                 }
                 else if(point.YValues[2] < point.YValues[3])
                 {
-                    double remainder = point.YValues[3] - point.YValues[3];
+                    double remainder = point.YValues[3] - point.YValues[2];
 
-                    if (remainder / point.YValues[3] * 100 <= threshhold)
+                    if (remainder <= scale)
                     {
-                        Console.WriteLine("case2");
+                        Console.WriteLine("case2: " + remainder);
                         double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
                         RectangleAnnotation annotation = new RectangleAnnotation();
                         annotation.BackColor = Color.FromArgb(128, Color.White);

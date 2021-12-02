@@ -370,7 +370,7 @@ namespace COP4365Project3
 
         }
 
-        public void isDragonFly(double interval, double scale = 0.1)
+        public void isDragonFly(double interval, double scale = 0.044)
         {
          
             double threshold = interval * scale;

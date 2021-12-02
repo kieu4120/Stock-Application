@@ -36,9 +36,11 @@ namespace COP4365Project3
         public StockDataForm(string companyName)
         {
             InitializeComponent();
+            stockPattern_cbBox.SelectedIndex = 0;
             this.BackColor = ColorTranslator.FromHtml("#1a152b");
             companyName_label.Text = companyName;
             companyName_label.ForeColor = Color.Gray;
+            stockPattern_label.ForeColor = Color.Gray;
 
 
             //dt.Columns.Add("date", typeof(DateTime));
@@ -167,12 +169,14 @@ namespace COP4365Project3
             candleStick_chart.Update();
 
             //var point1 = candleStick_chart.Series["data"].Points
-            
+
             //code to loop through candlesticks ( datapoint)
+            int i = 0;
             foreach (DataPoint p in candleStick_chart.Series["data"].Points)
             {
                 //Console.WriteLine(p.YValues[0]);
-                //Console.WriteLine(p);
+                Console.WriteLine( i + " " + p);
+                i++;
 
             /*
                 double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
@@ -192,6 +196,7 @@ namespace COP4365Project3
             
 
             //code to add rectangle box
+            /*
             var point = candleStick_chart.Series["data"].Points[0];
             double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
             RectangleAnnotation annotation = new RectangleAnnotation();
@@ -208,6 +213,114 @@ namespace COP4365Project3
             annotation.AnchorOffsetY = -(annotation.Height);
             annotation.SetAnchor(point);
             candleStick_chart.Annotations.Add(annotation);
+            */
         }
+
+        private void stockPattern_cbBox_SelectedIndexChanged(object sender,
+       System.EventArgs e)
+        {
+            string selectedItem = stockPattern_cbBox.SelectedItem.ToString();
+
+
+            switch (selectedItem)
+            {
+                case "Neutral":
+                    isNeutral();
+                    break;
+                case "Long-ledded":
+                    isLong_legged();
+                    break;
+                case "Gravestone":
+                    isGravestone();
+                    break;
+                case "DragonFly":
+                    isDragonFly();
+                    break;
+                case "Bullish Marubozus (Green)":
+                    isBullish_Marubozus();
+                    break;
+                case "Bearish Marubozus (Red)":
+                    isBearish_Marubozus();
+                    break;
+            }
+        }
+
+        public void isNeutral(double threshhold = 1)
+        {
+            foreach(DataPoint point in candleStick_chart.Series["data"].Points)
+            {
+                //close(2) and open(3). 
+                if( point.YValues[2] >= point.YValues[3])
+                {
+                    double remainder = point.YValues[2] - point.YValues[3];
+
+                    //
+                    if(remainder/point.YValues[2] * 100 <= threshhold)
+                    {
+                        Console.WriteLine("case1");
+                        double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
+                        RectangleAnnotation annotation = new RectangleAnnotation();
+                        annotation.BackColor = Color.FromArgb(128, Color.White);
+                        annotation.ToolTip = "Neutral";
+                        annotation.Width = 50 / candleStick_chart.Series["data"].Points.Count;
+                        annotation.Height = ((point.YValues[0] - point.YValues[1]) / y_range) * 85;
+
+                        annotation.AnchorOffsetY = -(annotation.Height);
+                        annotation.SetAnchor(point);
+                        candleStick_chart.Annotations.Add(annotation);
+                    }
+                }
+                else if(point.YValues[2] < point.YValues[3])
+                {
+                    double remainder = point.YValues[3] - point.YValues[3];
+
+                    if (remainder / point.YValues[3] * 100 <= threshhold)
+                    {
+                        Console.WriteLine("case2");
+                        double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
+                        RectangleAnnotation annotation = new RectangleAnnotation();
+                        annotation.BackColor = Color.FromArgb(128, Color.White);
+                        annotation.ToolTip = "Neutral";
+                        annotation.Width = 50 / candleStick_chart.Series["data"].Points.Count;
+                        annotation.Height = ((point.YValues[0] - point.YValues[1]) / y_range) * 85;
+
+                        annotation.AnchorOffsetY = -(annotation.Height);
+                        annotation.SetAnchor(point);
+                        candleStick_chart.Annotations.Add(annotation);
+                    }
+
+                }
+
+                
+            }
+        }
+
+        public void isLong_legged()
+        {
+
+        }
+
+        public void isGravestone()
+        {
+
+        }
+
+        public void isDragonFly()
+        {
+
+        }
+
+        public void isBullish_Marubozus()
+        {
+
+        }
+
+        public void isBearish_Marubozus()
+        {
+
+        }
+
+
+
     }
 }

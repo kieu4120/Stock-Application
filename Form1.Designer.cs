@@ -97,7 +97,7 @@ namespace COP4365Project3
             "GOOG-Alphabet",
             "UBER-Uber",
             "COIN-Coinbase",
-            "TLSA-Tesla",
+            "NVDA-Nvidia",
             "MSFT-Microsoft",
             "FVRR-Fiverr"});
             this.ticker_comboBox.Location = new System.Drawing.Point(322, 70);

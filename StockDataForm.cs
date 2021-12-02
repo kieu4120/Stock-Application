@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.IO;
-
+using System.Numerics;
 namespace COP4365Project3
 {
    
@@ -17,6 +17,9 @@ namespace COP4365Project3
     {
         int lowest;
         int highest;
+        List<int> dojiIndex;
+        List<int> annotationIndex;
+        
         DataTable dt = new DataTable();
         /// <summary>
         /// stretch background image
@@ -36,11 +39,17 @@ namespace COP4365Project3
         public StockDataForm(string companyName)
         {
             InitializeComponent();
+
+            dojiIndex = new List<int>();
+            annotationIndex = new List<int>();
+
             stockPattern_cbBox.SelectedIndex = 0;
             this.BackColor = ColorTranslator.FromHtml("#1a152b");
             companyName_label.Text = companyName;
             companyName_label.ForeColor = Color.Gray;
             stockPattern_label.ForeColor = Color.Gray;
+
+            
 
 
             //dt.Columns.Add("date", typeof(DateTime));
@@ -119,10 +128,10 @@ namespace COP4365Project3
             }
             
             //testing  
-            Console.WriteLine(dt.Compute("min([High])", string.Empty));
-            Console.WriteLine(dt.Compute("min([Low])", string.Empty));
-            Console.WriteLine(dt.Compute("min([Open])", string.Empty));
-            Console.WriteLine(dt.Compute("min([Close])", string.Empty));
+            //Console.WriteLine(dt.Compute("min([High])", string.Empty));
+            //Console.WriteLine(dt.Compute("min([Low])", string.Empty));
+            //Console.WriteLine(dt.Compute("min([Open])", string.Empty));
+            //Console.WriteLine(dt.Compute("min([Close])", string.Empty));
 
 
             loadChart();
@@ -178,11 +187,11 @@ namespace COP4365Project3
                 Console.WriteLine( i + " " + p);
                 i++;
 
-            /*
+                /*
                 double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
 
                 RectangleAnnotation annotation = new RectangleAnnotation();
-                annotation.BackColor = Color.Red;
+                annotation.BackColor = Color.FromArgb(128, Color.White);
                 annotation.ToolTip = "rectangle annotation";
                 annotation.Width = 50 / candleStick_chart.Series["data"].Points.Count;
  
@@ -191,9 +200,29 @@ namespace COP4365Project3
                 annotation.SetAnchor(p);
                 
                 candleStick_chart.Annotations.Add(annotation);
-              */ 
+                */
+              
             }
-            
+
+            //what is the height from lowest to highest;
+            //how about the width: time 2 though. 
+
+            /*
+            var p = candleStick_chart.Series["data"].Points[0];
+            var point = candleStick_chart.Series["data"].Points[1];
+            double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
+            RectangleAnnotation annotation = new RectangleAnnotation();
+            annotation.BackColor = Color.FromArgb(128, Color.White);
+            //annotation.BackColor = Color.Transparent;
+            annotation.ToolTip = "Neutral";
+            annotation.Width = 50 / candleStick_chart.Series["data"].Points.Count;
+            annotation.Height = ((point.YValues[0] - point.YValues[1]) / y_range) * 85;
+
+            annotation.AnchorOffsetY = -(annotation.Height);
+            annotation.SetAnchor(point,p);
+            candleStick_chart.Annotations.Add(annotation);
+            */
+
 
             //code to add rectangle box
             /*
@@ -219,7 +248,12 @@ namespace COP4365Project3
         private void stockPattern_cbBox_SelectedIndexChanged(object sender,
        System.EventArgs e)
         {
+            
             string selectedItem = stockPattern_cbBox.SelectedItem.ToString();
+            candleStick_chart.Annotations.Clear();
+
+            dojiIndex.Clear();
+            annotationIndex.Clear();
 
 
             switch (selectedItem)
@@ -227,14 +261,17 @@ namespace COP4365Project3
                 case "Neutral":
                     isNeutral((highest - lowest) / 5);
                     break;
-                case "Long-ledded":
-                    isLong_legged();
+                case "Long-legged":
+                    isDoji((highest - lowest) / 5);
+                    isLong_legged((highest - lowest) / 5);
                     break;
                 case "Gravestone":
+                    isDoji((highest - lowest) / 5);
                     isGravestone();
                     break;
                 case "DragonFly":
-                    isDragonFly();
+                    isDoji((highest - lowest) / 5);
+                    isDragonFly((highest - lowest) / 5);
                     break;
                 case "Bullish Marubozus (Green)":
                     isBullish_Marubozus();
@@ -243,64 +280,89 @@ namespace COP4365Project3
                     isBearish_Marubozus();
                     break;
             }
+
+
+            annotatePattern();
         }
 
-        public void isNeutral(double interval, double threshhold = 1)
+        public void annotatePattern()
         {
-
-            double scale = interval * .03;
-            Console.WriteLine("Scale: " + scale);
-            foreach(DataPoint point in candleStick_chart.Series["data"].Points)
+            foreach(int i in annotationIndex)
             {
-                //close(2) and open(3). 
-                if( point.YValues[2] >= point.YValues[3])
-                {
-                    double remainder = point.YValues[2] - point.YValues[3];
+                var point = candleStick_chart.Series["data"].Points[i];
+                double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
+                RectangleAnnotation annotation = new RectangleAnnotation();
+                annotation.BackColor = Color.FromArgb(128, Color.White);
+                //annotation.BackColor = Color.Transparent;
+                annotation.ToolTip = "Neutral";
+                annotation.Width = 50 / candleStick_chart.Series["data"].Points.Count;
+                annotation.Height = ((point.YValues[0] - point.YValues[1]) / y_range) * 85;
 
-                    //
-                    if(remainder <= scale)
-                    {
-                        Console.WriteLine("case1: " + remainder);
-                        double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
-                        RectangleAnnotation annotation = new RectangleAnnotation();
-                        annotation.BackColor = Color.FromArgb(128, Color.White);
-                        annotation.ToolTip = "Neutral";
-                        annotation.Width = 50 / candleStick_chart.Series["data"].Points.Count;
-                        annotation.Height = ((point.YValues[0] - point.YValues[1]) / y_range) * 85;
-
-                        annotation.AnchorOffsetY = -(annotation.Height);
-                        annotation.SetAnchor(point);
-                        candleStick_chart.Annotations.Add(annotation);
-                    }
-                }
-                else if(point.YValues[2] < point.YValues[3])
-                {
-                    double remainder = point.YValues[3] - point.YValues[2];
-
-                    if (remainder <= scale)
-                    {
-                        Console.WriteLine("case2: " + remainder);
-                        double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
-                        RectangleAnnotation annotation = new RectangleAnnotation();
-                        annotation.BackColor = Color.FromArgb(128, Color.White);
-                        annotation.ToolTip = "Neutral";
-                        annotation.Width = 50 / candleStick_chart.Series["data"].Points.Count;
-                        annotation.Height = ((point.YValues[0] - point.YValues[1]) / y_range) * 85;
-
-                        annotation.AnchorOffsetY = -(annotation.Height);
-                        annotation.SetAnchor(point);
-                        candleStick_chart.Annotations.Add(annotation);
-                    }
-
-                }
-
-                
+                annotation.AnchorOffsetY = -(annotation.Height);
+                annotation.SetAnchor(point);
+                candleStick_chart.Annotations.Add(annotation);
             }
         }
 
-        public void isLong_legged()
+        public void isDoji(double interval, double scale =.05)
+        {
+            double threshold = interval * scale;
+            Console.WriteLine("Scale: " + threshold);
+
+            int pos = 0;
+            foreach (DataPoint point in candleStick_chart.Series["data"].Points)
+            {
+                double remainder = Math.Abs(point.YValues[2] - point.YValues[3]);
+                if (remainder <= threshold)
+                {
+                    dojiIndex.Add(pos);
+                }
+                pos++;
+
+            }
+        }
+
+        public void isNeutral(double interval, double scale = .05)
         {
 
+            double threshold = interval * scale;
+            Console.WriteLine("Scale: " + threshold);
+
+            int pos = 0;
+            foreach(DataPoint point in candleStick_chart.Series["data"].Points)
+            {
+                //close(2) and open(3). 
+                double remainder = Math.Abs(point.YValues[2] - point.YValues[3]);
+
+                if (remainder <= threshold)
+                {
+                    dojiIndex.Add(pos);
+                    annotationIndex.Add(pos);
+                }
+                pos++;
+            }
+        }
+
+        public void isLong_legged(double interval,double scale = .70)
+        {
+            Console.WriteLine("called long-legged");
+            double threshold = interval * scale;
+            Console.WriteLine("Threshold: " + threshold);
+            Console.WriteLine("interval: " + interval);
+            foreach(int i in dojiIndex)
+            {
+                var p = candleStick_chart.Series["data"].Points[i];
+
+
+                
+                double remainder = Math.Abs(p.YValues[0] - p.YValues[1]);
+                Console.WriteLine("remainder: " + remainder);
+                if (remainder >= threshold)
+                {
+                    annotationIndex.Add(i);
+                }
+
+            }
         }
 
         public void isGravestone()
@@ -308,9 +370,21 @@ namespace COP4365Project3
 
         }
 
-        public void isDragonFly()
+        public void isDragonFly(double interval, double scale = 0.1)
         {
+         
+            double threshold = interval * scale;
+            foreach (int i in dojiIndex)
+            {
+                var p = candleStick_chart.Series["data"].Points[i];
 
+                double remainder = Math.Abs(p.YValues[0] - p.YValues[1]);
+                if (remainder >= threshold)
+                {
+                    annotationIndex.Add(i);
+                }
+
+            }
         }
 
         public void isBullish_Marubozus()

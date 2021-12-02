@@ -61,6 +61,8 @@ namespace COP4365Project3
             //start new form.
             StockDataForm stockForm = new StockDataForm(fromTickers[1]);
             stockForm.Show();
+
+            
         }
 
     }

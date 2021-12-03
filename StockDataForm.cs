@@ -276,7 +276,7 @@ namespace COP4365Project3
                 RectangleAnnotation annotation = new RectangleAnnotation();
                 annotation.BackColor = Color.FromArgb(128, Color.White);
                 //annotation.BackColor = Color.Transparent;
-                annotation.ToolTip = "Neutral";
+                //annotation.ToolTip = "Neutral";
                 annotation.Width = 50 / candleStick_chart.Series["data"].Points.Count;
                 annotation.Height = ((point.YValues[0] - point.YValues[1]) / y_range) * 85;
 

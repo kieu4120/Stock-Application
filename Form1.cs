@@ -15,6 +15,9 @@ namespace COP4365Project3
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// main form constructor
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -25,7 +28,7 @@ namespace COP4365Project3
             start_dateTimePicker.MaxDate = DateTime.Now;
             end_dateTimePicker.MaxDate = DateTime.Now;
 
-            //BackgroundImage = getFormBackgroundImage();
+            ticker_comboBox.SelectedIndex = 1;
         }
         public static double RoundUp(double input, int places)
         {
@@ -33,6 +36,11 @@ namespace COP4365Project3
             return Math.Ceiling(input * multiplier) / multiplier;
         }
 
+        /// <summary>
+        /// call when click apply button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void requestData_bttn_Click(object sender, EventArgs e)
         {
 

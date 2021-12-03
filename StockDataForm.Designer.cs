@@ -29,9 +29,9 @@ namespace COP4365Project3
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.candleStick_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.companyName_label = new System.Windows.Forms.Label();
             this.stockPattern_cbBox = new System.Windows.Forms.ComboBox();
@@ -41,19 +41,19 @@ namespace COP4365Project3
             // 
             // candleStick_chart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.candleStick_chart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.candleStick_chart.Legends.Add(legend2);
-            this.candleStick_chart.Location = new System.Drawing.Point(248, 262);
+            chartArea1.Name = "ChartArea1";
+            this.candleStick_chart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.candleStick_chart.Legends.Add(legend1);
+            this.candleStick_chart.Location = new System.Drawing.Point(12, 262);
             this.candleStick_chart.Name = "candleStick_chart";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
-            series2.Legend = "Legend1";
-            series2.Name = "data";
-            series2.YValuesPerPoint = 4;
-            this.candleStick_chart.Series.Add(series2);
-            this.candleStick_chart.Size = new System.Drawing.Size(1426, 623);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
+            series1.Legend = "Legend1";
+            series1.Name = "data";
+            series1.YValuesPerPoint = 4;
+            this.candleStick_chart.Series.Add(series1);
+            this.candleStick_chart.Size = new System.Drawing.Size(1662, 623);
             this.candleStick_chart.TabIndex = 0;
             this.candleStick_chart.Text = "chart1";
             // 
@@ -77,9 +77,9 @@ namespace COP4365Project3
             "DragonFly",
             "Bullish Marubozus (Green)",
             "Bearish Marubozus (Red)"});
-            this.stockPattern_cbBox.Location = new System.Drawing.Point(1553, 101);
+            this.stockPattern_cbBox.Location = new System.Drawing.Point(1398, 101);
             this.stockPattern_cbBox.Name = "stockPattern_cbBox";
-            this.stockPattern_cbBox.Size = new System.Drawing.Size(121, 33);
+            this.stockPattern_cbBox.Size = new System.Drawing.Size(276, 33);
             this.stockPattern_cbBox.TabIndex = 2;
             this.stockPattern_cbBox.SelectedIndexChanged += new System.EventHandler(this.stockPattern_cbBox_SelectedIndexChanged);
             // 

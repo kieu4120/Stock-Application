@@ -17,6 +17,8 @@ namespace COP4365Project3
     {
         int lowest;
         int highest;
+        double chartMin;
+        double chartMax;
         List<int> dojiIndex;
         List<int> annotationIndex;
         
@@ -48,8 +50,6 @@ namespace COP4365Project3
             companyName_label.Text = companyName;
             companyName_label.ForeColor = Color.Gray;
             stockPattern_label.ForeColor = Color.Gray;
-
-            
 
 
             //dt.Columns.Add("date", typeof(DateTime));
@@ -148,8 +148,19 @@ namespace COP4365Project3
             candleStick_chart.ChartAreas["ChartArea1"].AxisX.MajorGrid.LineWidth = 0;
             candleStick_chart.ChartAreas["ChartArea1"].AxisY.MajorGrid.LineWidth = 0;
 
+            candleStick_chart.ChartAreas["ChartArea1"].AxisX.MajorGrid.LineColor = Color.Gray;
+            candleStick_chart.ChartAreas["ChartArea1"].AxisY.MajorGrid.LineColor = Color.Gray;
+
+            candleStick_chart.ChartAreas["ChartArea1"].AxisX.MajorTickMark.LineColor = Color.Gray;
+            candleStick_chart.ChartAreas["ChartArea1"].AxisY.MajorTickMark.LineColor = Color.Gray;
+
+            candleStick_chart.ChartAreas["ChartArea1"].AxisX.LineColor = Color.Gray;
+            candleStick_chart.ChartAreas["ChartArea1"].AxisY.LineColor = Color.Gray;
+
             candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum = lowest - 10;
             candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum = highest + 10;
+            chartMin = lowest - 10;
+            chartMax = highest + 10;
 
             //candleStick_chart.ChartAreas[0].AxisY.IsStartedFromZero = false;
 
@@ -259,25 +270,25 @@ namespace COP4365Project3
             switch (selectedItem)
             {
                 case "Neutral":
-                    isNeutral((highest - lowest) / 5);
+                    isNeutral((chartMax - chartMin) / 5);
                     break;
                 case "Long-legged":
-                    isDoji((highest - lowest) / 5);
-                    isLong_legged((highest - lowest) / 5);
+                    isDoji((chartMax - chartMin) / 5);
+                    isLong_legged((chartMax - chartMin) / 5);
                     break;
                 case "Gravestone":
-                    isDoji((highest - lowest) / 5);
-                    isGravestone();
+                    isDoji((chartMax - chartMin) / 5);
+                    isGravestone((chartMax - chartMin) / 5);
                     break;
                 case "DragonFly":
-                    isDoji((highest - lowest) / 5);
-                    isDragonFly((highest - lowest) / 5);
+                    isDoji((chartMax - chartMin) / 5);
+                    isDragonFly((chartMax - chartMin) / 5);
                     break;
                 case "Bullish Marubozus (Green)":
-                    isBullish_Marubozus();
+                    isBullish_Marubozus((chartMax - chartMin) / 5);
                     break;
                 case "Bearish Marubozus (Red)":
-                    isBearish_Marubozus();
+                    isBearish_Marubozus((chartMax - chartMin) / 5);
                     break;
             }
 
@@ -365,21 +376,56 @@ namespace COP4365Project3
             }
         }
 
-        public void isGravestone()
+        public void isGravestone(double interval, double scale = .03)
         {
+            double threshold = interval * scale;
+            Console.WriteLine("threshold: " + threshold);
 
+            foreach(int i in dojiIndex)
+            {
+                var p = candleStick_chart.Series["data"].Points[i];
+
+                double remainder;
+                if (p.YValues[2] > p.YValues[3])
+                {
+                    remainder = Math.Abs(p.YValues[1] - p.YValues[3]);
+
+                }
+                else
+                {
+                    remainder = Math.Abs(p.YValues[1] - p.YValues[2]);
+                }
+
+                Console.WriteLine("remainder: " + remainder);
+                if (remainder <= threshold)
+                {
+                    annotationIndex.Add(i);
+                }
+            }
         }
 
-        public void isDragonFly(double interval, double scale = 0.044)
+        public void isDragonFly(double interval, double scale = 0.065)
         {
          
             double threshold = interval * scale;
+            Console.WriteLine("threshold: " + threshold);
             foreach (int i in dojiIndex)
             {
                 var p = candleStick_chart.Series["data"].Points[i];
 
-                double remainder = Math.Abs(p.YValues[0] - p.YValues[1]);
-                if (remainder >= threshold)
+                double remainder;
+                if(p.YValues[2] > p.YValues[3])
+                {
+                    remainder = Math.Abs(p.YValues[0] - p.YValues[2]);
+                     
+                }
+                else
+                {
+                    remainder = Math.Abs(p.YValues[0] - p.YValues[3]);
+                }
+
+                Console.WriteLine("remainder: " + remainder);
+                if (remainder <= threshold)
                 {
                     annotationIndex.Add(i);
                 }
@@ -387,14 +433,58 @@ namespace COP4365Project3
             }
         }
 
-        public void isBullish_Marubozus()
+        //green
+        public void isBullish_Marubozus(double interval, double scale = 0.22)
         {
+            double threshold = interval * scale;
+            Console.WriteLine("threshold: " + threshold);
+            int pos = 0;
+            foreach (DataPoint p in candleStick_chart.Series["data"].Points)
+            {
+                double remainder1;
+                double remainder2;
+
+                //bullish: 
+                if( p.YValues[2] > p.YValues[3])
+                {
+                    remainder1 = Math.Abs(p.YValues[0] - p.YValues[2]);
+                    remainder2 = Math.Abs(p.YValues[1] - p.YValues[3]);
+
+                    Console.WriteLine("remainder1: " + remainder1 + ", remainder2: " + remainder2);
+
+                    if (remainder1 <= threshold && remainder2 <= threshold)
+                        annotationIndex.Add(pos);
+                }
+
+                pos++;
+            }
 
         }
 
-        public void isBearish_Marubozus()
+        //red
+        public void isBearish_Marubozus(double interval, double scale = 0.22)
         {
+            double threshold = interval * scale;
+            Console.WriteLine("threshold: " + threshold);
+            int pos = 0;
+            foreach (DataPoint p in candleStick_chart.Series["data"].Points)
+            {
+                double remainder1;
+                double remainder2;
 
+                //bullish: 
+                if (p.YValues[2] < p.YValues[3])
+                {
+                    remainder1 = Math.Abs(p.YValues[0] - p.YValues[3]);
+                    remainder2 = Math.Abs(p.YValues[1] - p.YValues[2]);
+                    Console.WriteLine("remainder1: " + remainder1 + ", remainder2: " + remainder2);
+
+                    if (remainder1 <= threshold && remainder2 <= threshold)
+                        annotationIndex.Add(pos);
+                }
+
+                pos++;
+            }
         }
 
 

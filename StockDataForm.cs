@@ -143,14 +143,6 @@ namespace COP4365Project3
                 if (highest < i)
                     highest = i;
             }
-            
-            //testing  
-            //Console.WriteLine(dt.Compute("min([High])", string.Empty));
-            //Console.WriteLine(dt.Compute("min([Low])", string.Empty));
-            //Console.WriteLine(dt.Compute("min([Open])", string.Empty));
-            //Console.WriteLine(dt.Compute("min([Close])", string.Empty));
-
-
             loadChart();
         }
 
@@ -192,29 +184,15 @@ namespace COP4365Project3
             candleStick_chart.Series["data"].CustomProperties = "PriceDownColor=Green,PriceUpColor=Red";
             candleStick_chart.DataManipulator.IsStartFromFirst = true;
             candleStick_chart.Series["data"].IsVisibleInLegend = false;
-            //candleStick_chart.Series["data"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
+           
             candleStick_chart.Series["data"]["OpenCloseStyle"] = "Triangle";
             candleStick_chart.Series["data"]["ShowOpenClose"] = "Both";
-            //candleStick_chart.Series["data"]["ShowHighLow"] = "Both";
-            //candleStick_chart.Series["data"].IsValueShownAsLabel = true;
             candleStick_chart.DataManipulator.IsStartFromFirst = true;
 
             candleStick_chart.DataSource = dt;
             candleStick_chart.DataBind();
-            candleStick_chart.ChartAreas["ChartArea1"].AxisX.Interval = 1;
 
             candleStick_chart.Update();
-
-            //var point1 = candleStick_chart.Series["data"].Points
-
-            //code to loop through candlesticks ( datapoint)
-            int i = 0;
-            foreach (DataPoint p in candleStick_chart.Series["data"].Points)
-            {
-                Console.WriteLine( i + " " + p);
-                i++;
-              
-            }
         }
 
 
@@ -276,8 +254,6 @@ namespace COP4365Project3
                 double y_range = candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum - candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum;
                 RectangleAnnotation annotation = new RectangleAnnotation();
                 annotation.BackColor = Color.FromArgb(128, Color.White);
-                //annotation.BackColor = Color.Transparent;
-                //annotation.ToolTip = "Neutral";
                 annotation.Width = 50 / candleStick_chart.Series["data"].Points.Count;
                 annotation.Height = ((point.YValues[0] - point.YValues[1]) / y_range) * 85;
 
@@ -295,7 +271,6 @@ namespace COP4365Project3
         public void isDoji(double interval, double scale =.05)
         {
             double threshold = interval * scale;
-            Console.WriteLine("Scale: " + threshold);
 
             int pos = 0;
             foreach (DataPoint point in candleStick_chart.Series["data"].Points)
@@ -320,7 +295,7 @@ namespace COP4365Project3
 
             double threshold = interval * scale;
             double threshold2 = interval * scale2;
-            Console.WriteLine("Scale: " + threshold);
+
 
             int pos = 0;
             foreach(DataPoint point in candleStick_chart.Series["data"].Points)
@@ -329,8 +304,6 @@ namespace COP4365Project3
                 double low = point.YValues[1];
                 double close = point.YValues[2];
                 double open = point.YValues[3];
-                 
-                //close(2) and open(3). 
                 double remainder = Math.Abs(point.YValues[2] - point.YValues[3]);
                 double top = Math.Abs(high - close);
                 double bottom = Math.Abs(open - low);
@@ -364,10 +337,7 @@ namespace COP4365Project3
         /// <param name="scale"></param>
         public void isLong_legged(double interval,double scale = .70)
         {
-            Console.WriteLine("called long-legged");
             double threshold = interval * scale;
-            Console.WriteLine("Threshold: " + threshold);
-            Console.WriteLine("interval: " + interval);
             foreach(int i in dojiIndex)
             {
                 var p = candleStick_chart.Series["data"].Points[i];
@@ -375,7 +345,7 @@ namespace COP4365Project3
 
                 
                 double remainder = Math.Abs(p.YValues[0] - p.YValues[1]);
-                Console.WriteLine("remainder: " + remainder);
+
                 if (remainder >= threshold)
                 {
                     annotationIndex.Add(i);
@@ -392,7 +362,7 @@ namespace COP4365Project3
         public void isGravestone(double interval, double scale = .03)
         {
             double threshold = interval * scale;
-            Console.WriteLine("threshold: " + threshold);
+
 
             foreach(int i in dojiIndex)
             {
@@ -409,7 +379,7 @@ namespace COP4365Project3
                     remainder = Math.Abs(p.YValues[1] - p.YValues[2]);
                 }
 
-                Console.WriteLine("remainder: " + remainder);
+ 
                 if (remainder <= threshold)
                 {
                     annotationIndex.Add(i);
@@ -427,7 +397,7 @@ namespace COP4365Project3
         {
          
             double threshold = interval * scale;
-            Console.WriteLine("threshold: " + threshold);
+
             foreach (int i in dojiIndex)
             {
                 var p = candleStick_chart.Series["data"].Points[i];
@@ -443,7 +413,7 @@ namespace COP4365Project3
                     remainder = Math.Abs(p.YValues[0] - p.YValues[3]);
                 }
 
-                Console.WriteLine("remainder: " + remainder);
+ 
                 if (remainder <= threshold)
                 {
                     annotationIndex.Add(i);
@@ -461,14 +431,13 @@ namespace COP4365Project3
         public void isBullish_Marubozus(double interval, double scale = 0.22, double threshold3 = .14)
         {
             double threshold = interval * scale;
-            Console.WriteLine("threshold: " + threshold);
+
             int pos = 0;
             foreach (DataPoint p in candleStick_chart.Series["data"].Points)
             {
                 double remainder1;
                 double remainder2;
 
-                //bullish: 
                 if( p.YValues[2] > p.YValues[3])
                 {
                     remainder1 = Math.Abs(p.YValues[0] - p.YValues[2]);
@@ -476,8 +445,7 @@ namespace COP4365Project3
                     double threshold1 = remainder1 / p.YValues[0] * 100;
                     double threshold2 = remainder2 / p.YValues[2] * 100;
 
-                    //Console.WriteLine("remainder1: " + remainder1 + ", remainder2: " + remainder2);
-                    Console.WriteLine("threshold1: " + threshold1 + "\n +threshold2:" + threshold2);
+ 
                     if (threshold1 <= threshold3 && threshold2 <= threshold3)
                         annotationIndex.Add(pos);
                 }
@@ -496,23 +464,18 @@ namespace COP4365Project3
         public void isBearish_Marubozus(double interval, double scale = 0.22, double threshold3 = .14)
         {
             double threshold = interval * scale;
-            Console.WriteLine("threshold: " + threshold);
             int pos = 0;
             foreach (DataPoint p in candleStick_chart.Series["data"].Points)
             {
                 double remainder1;
                 double remainder2;
 
-                //bullish: close < open then red 
                 if (p.YValues[2] < p.YValues[3])
                 {
                     remainder1 = Math.Abs(p.YValues[0] - p.YValues[3]);
                     remainder2 = Math.Abs(p.YValues[1] - p.YValues[2]);
                     double threshold1 = remainder1 / p.YValues[0] * 100;
                     double threshold2 = remainder2 / p.YValues[2] * 100;
-
-                    //Console.WriteLine("remainder1: " + remainder1 + ", remainder2: " + remainder2);
-                    Console.WriteLine("threshold1: " + threshold1 + "\n +threshold2:" + threshold2);
 
                     if (threshold1 <= threshold3 && threshold2 <= threshold3)
                         annotationIndex.Add(pos);

@@ -31,11 +31,7 @@ namespace COP4365Project3
             ticker_comboBox.SelectedIndex = 1;
             candleStick_period_cbBox.SelectedIndex = 0;
         }
-        public static double RoundUp(double input, int places)
-        {
-            double multiplier = Math.Pow(10, Convert.ToDouble(places));
-            return Math.Ceiling(input * multiplier) / multiplier;
-        }
+
 
         /// <summary>
         /// call when click apply button
@@ -59,7 +55,7 @@ namespace COP4365Project3
             else if (candleStick_period_cbBox.Text == "Weekly")
                 interval = "1wk";
             else if (candleStick_period_cbBox.Text == "Monthly")
-                interval = "1m";
+                interval = "1mo";
 
             //download data 
             string URL = "https://query1.finance.yahoo.com/v7/finance/download/" + ticker + "?period1=" + start_epoch_ + "&period2=" + end_epoch_ + "&interval=" + interval + "&events=history&includeAdjustedClose=true";

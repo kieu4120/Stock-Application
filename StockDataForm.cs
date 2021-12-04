@@ -264,10 +264,7 @@ namespace COP4365Project3
 
                 annotation.AnchorOffsetY = -(annotation.Height);
 
-
-                if(candleStick_chart.Series["data"].Points.Count >=40)
-                    annotation.AnchorOffsetY = -(annotation.Height);
-                else if (candleStick_chart.Series["data"].Points.Count >= 46 && candleStick_chart.Series["data"].Points.Count < 67)
+                if (candleStick_chart.Series["data"].Points.Count >= 46 && candleStick_chart.Series["data"].Points.Count < 67)
                 {
                     annotation.AnchorOffsetX = candleStick_chart.Series["data"].Points.Count * 0.009;
                     annotation.Width += 1.7;
@@ -277,7 +274,7 @@ namespace COP4365Project3
                     annotation.AnchorOffsetX = candleStick_chart.Series["data"].Points.Count * 0.002;
                     annotation.Width += 1.6;
                 }
-                else
+                else if(candleStick_chart.Series["data"].Points.Count > 80)
                 {
                     annotation.AnchorOffsetX = candleStick_chart.Series["data"].Points.Count * 0.001;
                     annotation.Width += 1.4;

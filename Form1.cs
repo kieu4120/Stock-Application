@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using RestSharp;
-using Newtonsoft.Json;
 using System.IO;
 
 namespace COP4365Project3

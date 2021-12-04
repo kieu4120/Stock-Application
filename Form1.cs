@@ -45,6 +45,16 @@ namespace COP4365Project3
             int start_epoch_ = Convert.ToInt32((start_dateTimePicker.Value.ToUniversalTime()-epoch).TotalSeconds);
             int end_epoch_ = Convert.ToInt32((end_dateTimePicker.Value.ToUniversalTime() - epoch).TotalSeconds);
 
+            if(start_epoch_ > end_epoch_)
+            {
+                string message = "End date must be newer than start date";
+                string title = "Title";
+                MessageBox.Show(message, title);
+
+                return;
+            }
+
+
             string[] fromTickers = ticker_comboBox.Text.Split('-');
             string ticker = fromTickers[0];
 

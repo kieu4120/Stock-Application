@@ -18,11 +18,11 @@ namespace COP4365Project3
         /// <summary>
         /// lowest in the data
         /// </summary>
-        int lowest;
+        double lowest;
         /// <summary>
         /// highest in the data
         /// </summary>
-        int highest;
+        double highest;
 
         /// <summary>
         /// minimum in the yaxis
@@ -171,6 +171,9 @@ namespace COP4365Project3
 
             candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum = lowest - 10;
             candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum = highest + 10;
+
+            //candleStick_chart.ChartAreas["ChartArea1"].AxisY.Maximum = (int)Math.Ceiling(highest);
+            //candleStick_chart.ChartAreas["ChartArea1"].AxisY.Minimum = (int)Math.Floor(lowest);
             chartMin = lowest - 10;
             chartMax = highest + 10;
 
@@ -179,6 +182,7 @@ namespace COP4365Project3
             //set up the chart
             candleStick_chart.Series["data"].XValueMember = "date";
             candleStick_chart.Series["data"].YValueMembers = "High,Low,Close,Open";
+            candleStick_chart.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
 
             candleStick_chart.Series["data"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Date;
             candleStick_chart.Series["data"].CustomProperties = "PriceDownColor=Green,PriceUpColor=Red";
@@ -187,6 +191,7 @@ namespace COP4365Project3
            
             candleStick_chart.Series["data"]["OpenCloseStyle"] = "Triangle";
             candleStick_chart.Series["data"]["ShowOpenClose"] = "Both";
+            candleStick_chart.Series["data"]["PointWidth"] = "0.5";
             candleStick_chart.DataManipulator.IsStartFromFirst = true;
 
             candleStick_chart.DataSource = dt;
@@ -258,8 +263,31 @@ namespace COP4365Project3
                 annotation.Height = ((point.YValues[0] - point.YValues[1]) / y_range) * 85;
 
                 annotation.AnchorOffsetY = -(annotation.Height);
+
+
+                if(candleStick_chart.Series["data"].Points.Count >=40)
+                    annotation.AnchorOffsetY = -(annotation.Height);
+                else if (candleStick_chart.Series["data"].Points.Count >= 46 && candleStick_chart.Series["data"].Points.Count < 67)
+                {
+                    annotation.AnchorOffsetX = candleStick_chart.Series["data"].Points.Count * 0.009;
+                    annotation.Width += 1.7;
+                }
+                else if (candleStick_chart.Series["data"].Points.Count >= 67 && candleStick_chart.Series["data"].Points.Count < 80)
+                {
+                    annotation.AnchorOffsetX = candleStick_chart.Series["data"].Points.Count * 0.002;
+                    annotation.Width += 1.6;
+                }
+                else
+                {
+                    annotation.AnchorOffsetX = candleStick_chart.Series["data"].Points.Count * 0.001;
+                    annotation.Width += 1.4;
+                }
+
+               
+               
                 annotation.SetAnchor(point);
                 candleStick_chart.Annotations.Add(annotation);
+
             }
         }
 
@@ -270,19 +298,22 @@ namespace COP4365Project3
         /// <param name="scale"></param>
         public void isDoji(double interval, double scale =.05)
         {
-            double threshold = interval * scale;
 
             int pos = 0;
             foreach (DataPoint point in candleStick_chart.Series["data"].Points)
             {
-                double remainder = Math.Abs(point.YValues[2] - point.YValues[3]);
-                if (remainder <= threshold)
+                //point: 
+
+                double number = point.YValues[2] > point.YValues[3] ? point.YValues[2] : point.YValues[3];
+
+                if (Math.Abs(point.YValues[2] - point.YValues[3]) <= 0.0005 * number)
                 {
                     dojiIndex.Add(pos);
                 }
                 pos++;
 
             }
+
         }
 
         /// <summary>
@@ -298,31 +329,20 @@ namespace COP4365Project3
 
 
             int pos = 0;
-            foreach(DataPoint point in candleStick_chart.Series["data"].Points)
+            if (dojiIndex.Count == 0)
+                return;
+
+            foreach (int i in dojiIndex.ToList())
             {
-                double high = point.YValues[0];
-                double low = point.YValues[1];
-                double close = point.YValues[2];
-                double open = point.YValues[3];
-                double remainder = Math.Abs(point.YValues[2] - point.YValues[3]);
-                double top = Math.Abs(high - close);
-                double bottom = Math.Abs(open - low);
+                //Console.WriteLine("cool");
+                var point = candleStick_chart.Series["data"].Points[i];
 
+                double top = point.YValues[2] > point.YValues[3] ? point.YValues[2] : point.YValues[3];
+                double bottom = point.YValues[2] < point.YValues[3] ? point.YValues[2] : point.YValues[3];
 
-                if ( close > open)
+                if (point.YValues[0] - top >= 0.0005 * point.YValues[0] || bottom - point.YValues[1] >= 0.0005 * bottom)
                 {
-                    top = Math.Abs( high - close);
-                   bottom = Math.Abs(open - low);
-                }
-                else if (close <= open)
-                {
-                   top = Math.Abs(high - open);
-                   bottom = Math.Abs(close - low);
-                }
-
-                if (remainder <= threshold && top <= threshold2 && bottom <= threshold2 && Math.Abs(top - bottom) / bottom <= .15)
-                {
-                    dojiIndex.Add(pos);
+                    Console.WriteLine("cool");
                     annotationIndex.Add(pos);
                 }
 
@@ -337,16 +357,19 @@ namespace COP4365Project3
         /// <param name="scale"></param>
         public void isLong_legged(double interval,double scale = .70)
         {
+            if (dojiIndex.Count == 0)
+                return;
+
+
             double threshold = interval * scale;
-            foreach(int i in dojiIndex)
+            foreach (int i in dojiIndex.ToList())
             {
-                var p = candleStick_chart.Series["data"].Points[i];
+                var point = candleStick_chart.Series["data"].Points[i];
 
+                double large = point.YValues[2] > point.YValues[3] ? point.YValues[2] : point.YValues[3];
+                double small = point.YValues[2] < point.YValues[3] ? point.YValues[2] : point.YValues[3];
 
-                
-                double remainder = Math.Abs(p.YValues[0] - p.YValues[1]);
-
-                if (remainder >= threshold)
+                if (point.YValues[0] - large >= 0.002 * point.YValues[0] && small - point.YValues[1] >= 0.002 * small)
                 {
                     annotationIndex.Add(i);
                 }
@@ -363,28 +386,24 @@ namespace COP4365Project3
         {
             double threshold = interval * scale;
 
-
-            foreach(int i in dojiIndex)
+            int pos = 0;
+            if (dojiIndex.Count == 0)
+                return;
+            foreach(int i in dojiIndex.ToList())
             {
-                var p = candleStick_chart.Series["data"].Points[i];
+                var point = candleStick_chart.Series["data"].Points[i];
 
-                double remainder;
-                if (p.YValues[2] > p.YValues[3])
-                {
-                    remainder = Math.Abs(p.YValues[1] - p.YValues[3]);
+                double large = point.YValues[2] > point.YValues[3] ? point.YValues[2] : point.YValues[3];
+                double small = point.YValues[2] < point.YValues[3] ? point.YValues[2] : point.YValues[3];
 
-                }
-                else
+                if (small - point.YValues[1] <= 0.0005 * small)
                 {
-                    remainder = Math.Abs(p.YValues[1] - p.YValues[2]);
-                }
-
- 
-                if (remainder <= threshold)
-                {
-                    annotationIndex.Add(i);
+                    annotationIndex.Add(pos);
                 }
             }
+            pos++;
+
+
         }
 
 
@@ -398,27 +417,18 @@ namespace COP4365Project3
          
             double threshold = interval * scale;
 
-            foreach (int i in dojiIndex)
+            int pos = 0;
+            if (dojiIndex.Count == 0)
+                return;
+            foreach (int i in dojiIndex.ToList())
             {
-                var p = candleStick_chart.Series["data"].Points[i];
+                var point = candleStick_chart.Series["data"].Points[i];
+                double large = point.YValues[2] > point.YValues[3] ? point.YValues[2] : point.YValues[3];
+                double small = point.YValues[2] < point.YValues[3] ? point.YValues[2] : point.YValues[3];
 
-                double remainder;
-                if(p.YValues[2] > p.YValues[3])
-                {
-                    remainder = Math.Abs(p.YValues[0] - p.YValues[2]);
-                     
-                }
-                else
-                {
-                    remainder = Math.Abs(p.YValues[0] - p.YValues[3]);
-                }
-
- 
-                if (remainder <= threshold)
-                {
-                    annotationIndex.Add(i);
-                }
-
+                if ((point.YValues[0] - large <= 0.0005 * point.YValues[0]))
+                    annotationIndex.Add(pos);
+                pos++;
             }
         }
 

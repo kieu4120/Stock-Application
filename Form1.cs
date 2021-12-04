@@ -29,6 +29,7 @@ namespace COP4365Project3
             end_dateTimePicker.MaxDate = DateTime.Now;
 
             ticker_comboBox.SelectedIndex = 1;
+            candleStick_period_cbBox.SelectedIndex = 0;
         }
         public static double RoundUp(double input, int places)
         {

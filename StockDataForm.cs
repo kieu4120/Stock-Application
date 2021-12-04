@@ -57,7 +57,7 @@ namespace COP4365Project3
             dojiIndex = new List<int>();
             annotationIndex = new List<int>();
 
-            stockPattern_cbBox.SelectedIndex = 0;
+            stockPattern_cbBox.DropDownStyle = ComboBoxStyle.DropDownList;
             this.BackColor = ColorTranslator.FromHtml("#1a152b");
             companyName_label.Text = companyName;
             companyName_label.ForeColor = Color.Gray;
@@ -237,6 +237,7 @@ namespace COP4365Project3
             switch (selectedItem)
             {
                 case "Neutral":
+                    isDoji((chartMax - chartMin) / 5);
                     isNeutral((chartMax - chartMin) / 5);
                     break;
                 case "Long-legged":
@@ -314,23 +315,44 @@ namespace COP4365Project3
         /// </summary>
         /// <param name="interval"></param>
         /// <param name="scale"></param>
-        public void isNeutral(double interval, double scale = .05)
+        public void isNeutral(double interval, double scale = .05, double scale2 = .085)
         {
 
             double threshold = interval * scale;
+            double threshold2 = interval * scale2;
             Console.WriteLine("Scale: " + threshold);
 
             int pos = 0;
             foreach(DataPoint point in candleStick_chart.Series["data"].Points)
             {
+                double high = point.YValues[0];
+                double low = point.YValues[1];
+                double close = point.YValues[2];
+                double open = point.YValues[3];
+                 
                 //close(2) and open(3). 
                 double remainder = Math.Abs(point.YValues[2] - point.YValues[3]);
+                double top = Math.Abs(high - close);
+                double bottom = Math.Abs(open - low);
 
-                if (remainder <= threshold)
+
+                if ( close > open)
+                {
+                    top = Math.Abs( high - close);
+                   bottom = Math.Abs(open - low);
+                }
+                else if (close <= open)
+                {
+                   top = Math.Abs(high - open);
+                   bottom = Math.Abs(close - low);
+                }
+
+                if (remainder <= threshold && top <= threshold2 && bottom <= threshold2 && Math.Abs(top - bottom) / bottom <= .15)
                 {
                     dojiIndex.Add(pos);
                     annotationIndex.Add(pos);
                 }
+
                 pos++;
             }
         }
@@ -481,7 +503,7 @@ namespace COP4365Project3
                 double remainder1;
                 double remainder2;
 
-                //bullish: 
+                //bullish: close < open then red 
                 if (p.YValues[2] < p.YValues[3])
                 {
                     remainder1 = Math.Abs(p.YValues[0] - p.YValues[3]);
